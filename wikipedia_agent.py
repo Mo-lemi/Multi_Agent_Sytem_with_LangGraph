@@ -27,7 +27,7 @@ def wikipedia_tool(
         return f"Failed to execute. Error: {repr(e)}"
     return f"Successfully executed:\nWikipedia summary: {summary}"
 
-# Test with Apple query
-company_name = "Apple Inc."
+# Test with Microsoft query
+company_name = "Microsoft"
 wiki_summary = wikipedia_tool.invoke(f"{company_name}")
 print(wiki_summary)
