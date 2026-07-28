@@ -2,5 +2,5 @@
 A practice project for the building multi-agent system with LangGraph course. I'll be creating/building an agentic assistant to help retrieve and summarize information on Fortune 500 companies.
 
 Tool 1 : wikipedia agent
-Tool 2 : 
+Tool 2 : stock data agent
 Tool 3 : visualisation agent
