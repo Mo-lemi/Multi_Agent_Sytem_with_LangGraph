@@ -4,6 +4,29 @@ from langchain_core.tools import tool
 import pandas as pd
 import os
 
+@tool
+def wikipedia_tool(
+    query: Annotated[str, "The Wikipedia search to execute to find key summary information."],
+):
+    """Use this to search Wikipedia for factual information."""
+    
+    wikipedia.set_user_agent("company-research-tool/1.0 (https://www.datacamp.com; content@datacamp.com)")
+    
+    try:
+        # Step 1: Search using query
+        results = wikipedia.search(query)
+        
+        if not results:
+            return "No results found on Wikipedia."
+        
+        # Step 2: Retrieve page title
+        title = results[0]
+
+        # Step 3: Fetch summary
+        summary = wikipedia.summary(title, sentences=8, auto_suggest=False, redirect=True)
+    except BaseException as e:
+        return f"Failed to execute. Error: {repr(e)}"
+    return f"Successfully executed:\nWikipedia summary: {summary}"
 
 @tool
 def stock_data_tool(
@@ -39,3 +62,18 @@ def stock_data_tool(
 
     return f"Successfully executed the stock performance data retrieval tool to retrieve the last *{num_days} days* of data for company **{company_ticker}**:\n\n{filtered_df.to_markdown()}"
 
+from langchain_experimental.utilities import PythonREPL
+
+repl = PythonREPL()
+
+@tool
+def python_repl_tool(
+    code: Annotated[str, "The python code to execute to generate your chart."],
+):
+    """Use this to execute python code. If you want to see the output of a value,
+    you should print it out with `print(...)`. This is visible to the user. The chart should be displayed using `plt.show()`."""
+    try:
+        result = repl.run(code)
+    except BaseException as e:
+        return f"Failed to execute. Error: {repr(e)}"
+    return f"Successfully executed the Python REPL tool.\n\nPython code executed:\n\`\`\`python\n{code}\n\`\`\`\n\nCode output:\n\`\`\`\n{result}\`\`\`"
