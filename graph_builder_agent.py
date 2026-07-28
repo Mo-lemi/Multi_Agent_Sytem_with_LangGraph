@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+load_dotenv()
 from typing import Annotated
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
@@ -14,7 +18,7 @@ graph_builder = StateGraph(State)
 # Add three tools to the list: wikipedia_tool, stock_data_tool, and python_repl_tool
 tools = [wikipedia_tool, stock_data_tool, python_repl_tool]
 
-llm = ChatOpenAI(model="gpt-4o-mini")
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
 # Tell the LLM which tools it can call
 llm_with_tools = llm.bind_tools(tools)
@@ -38,5 +42,5 @@ graph_builder.add_edge("tools", "llm")
 
 graph = graph_builder.compile()
 
-# Visualize your graph
-graph
+# # Visualize your graph
+# graph
