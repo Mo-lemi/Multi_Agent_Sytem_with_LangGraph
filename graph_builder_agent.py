@@ -37,3 +37,6 @@ graph_builder.add_conditional_edges("llm", tools_condition, ["tools", END])
 graph_builder.add_edge("tools", "llm")
 
 graph = graph_builder.compile()
+
+# Visualize your graph
+graph
