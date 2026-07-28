@@ -4,3 +4,6 @@ A practice project for the building multi-agent system with LangGraph course. I'
 Tool 1 : wikipedia agent
 Tool 2 : stock data agent
 Tool 3 : visualisation agent
+agent_tools.py = tool 1 + tool 2 + tool 3
+
+graphy_bulder_agent.py = This module builds graphs .... eish, I am not sure. Still learning. 
